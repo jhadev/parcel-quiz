@@ -117,13 +117,13 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"assets/questions.js":[function(require,module,exports) {
+})({"assets/question.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.comboQuiz = exports.sciQuiz = exports.triviaQuiz = exports.oopQuiz = void 0;
+exports.default = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -136,31 +136,136 @@ var Question = function Question(question, choices, correctAnswer, title) {
   this.correctAnswer = correctAnswer;
   this.title = title;
   this.userAnswer = '';
-}; //make some question objects with the blueprint
+};
 
-
-var oop1 = new Question('What is not a principle of Object Oriented Programming?', ['Abstraction', 'Encapsulation', 'Inheritence', 'Polymorphism', 'Impressionism'], 'Impressionism', 'Object Oriented Programming');
-var oop2 = new Question('What type of inheritence pattern is utilized in JavaScript?', ['Prototypal', 'Classical', 'Trust'], 'Prototypal', 'Object Oriented Programming');
-var oop3 = new Question('Which is better? Functional Programming or Object Oriented Programming?', ['Object Oriented Programming', 'Functional Programming', 'Neither, everything has its uses'], 'Neither, everything has its uses', 'Object Oriented Programming');
-var trivia1 = new Question("Which group released the hit song, 'Smells Like Teen Spirit'?", ['Nirvana', 'Backstreet Boys', 'The Offspring', 'No Doubt'], 'Nirvana', "90's Trivia");
-var trivia2 = new Question("What was Doug's best friend's name?", ['Skeeter', 'Mark', 'Zach', 'Cody'], 'Skeeter', "90's Trivia");
-var trivia3 = new Question('What was the name of the principal at Bayside High in Saved By The Bell?', ['Mr.Zhou', 'Mr.Driggers', 'Mr.Belding', 'Mr.Page'], 'Mr.Belding', "90's Trivia");
-var sciTrivia1 = new Question("What is the name of Jupiter's largest moon", ['Oberon', 'Ganymede', 'Titan', 'Europa'], 'Ganymede', 'Science Quiz');
-var sciTrivia2 = new Question("What does the 'c' in E=mc^2 stand for?", ['Energy', 'Speed of Light', 'Mass', 'Dark Matter'], 'Speed of Light', 'Science Quiz');
-var sciTrivia3 = new Question('What precious stone is the hardest?', ['Diamond', 'Ruby', 'Sapphire', 'Emerald'], 'Diamond', 'Science Quiz'); //declare some question group arrays to use in the addQuestions method
-
-var oopQuiz = [oop1, oop2, oop3];
-exports.oopQuiz = oopQuiz;
-var triviaQuiz = [trivia1, trivia2, trivia3];
-exports.triviaQuiz = triviaQuiz;
-var sciQuiz = [sciTrivia1, sciTrivia2, sciTrivia3];
-exports.sciQuiz = sciQuiz;
-var comboQuiz = [].concat(oopQuiz, sciQuiz, triviaQuiz);
-exports.comboQuiz = comboQuiz;
-},{}],"assets/index.js":[function(require,module,exports) {
+var _default = Question;
+exports.default = _default;
+},{}],"assets/quizzes/sciQuiz.js":[function(require,module,exports) {
 "use strict";
 
-var _questions = require("./questions");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _question = _interopRequireDefault(require("../question"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var sciTrivia1 = new _question.default("What is the name of Jupiter's largest moon", ['Oberon', 'Ganymede', 'Titan', 'Europa'], 'Ganymede', 'Science Quiz');
+var sciTrivia2 = new _question.default("What does the 'c' in E=mc^2 stand for?", ['Energy', 'Speed of Light', 'Mass', 'Dark Matter'], 'Speed of Light', 'Science Quiz');
+var sciTrivia3 = new _question.default('What precious stone is the hardest?', ['Diamond', 'Ruby', 'Sapphire', 'Emerald'], 'Diamond', 'Science Quiz');
+var sciQuiz = [sciTrivia1, sciTrivia2, sciTrivia3];
+var _default = sciQuiz;
+exports.default = _default;
+},{"../question":"assets/question.js"}],"assets/quizzes/triviaQuiz.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _question = _interopRequireDefault(require("../question"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var trivia1 = new _question.default("Which group released the hit song, 'Smells Like Teen Spirit'?", ['Nirvana', 'Backstreet Boys', 'The Offspring', 'No Doubt'], 'Nirvana', "90's Trivia");
+var trivia2 = new _question.default("What was Doug's best friend's name?", ['Skeeter', 'Mark', 'Zach', 'Cody'], 'Skeeter', "90's Trivia");
+var trivia3 = new _question.default('What was the name of the principal at Bayside High in Saved By The Bell?', ['Mr.Zhou', 'Mr.Driggers', 'Mr.Belding', 'Mr.Page'], 'Mr.Belding', "90's Trivia");
+var triviaQuiz = [trivia1, trivia2, trivia3];
+var _default = triviaQuiz;
+exports.default = _default;
+},{"../question":"assets/question.js"}],"assets/quizzes/oopQuiz.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _question = _interopRequireDefault(require("../question"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var oop1 = new _question.default('What is not a principle of Object Oriented Programming?', ['Abstraction', 'Encapsulation', 'Inheritence', 'Polymorphism', 'Impressionism'], 'Impressionism', 'Object Oriented Programming');
+var oop2 = new _question.default('What type of inheritence pattern is utilized in JavaScript?', ['Prototypal', 'Classical', 'Trust'], 'Prototypal', 'Object Oriented Programming');
+var oop3 = new _question.default('Which is better? Functional Programming or Object Oriented Programming?', ['Object Oriented Programming', 'Functional Programming', 'Neither, everything has its uses'], 'Neither, everything has its uses', 'Object Oriented Programming');
+var oopQuiz = [oop1, oop2, oop3];
+var _default = oopQuiz;
+exports.default = _default;
+},{"../question":"assets/question.js"}],"assets/quizzes/comboQuiz.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _sciQuiz = _interopRequireDefault(require("./sciQuiz"));
+
+var _triviaQuiz = _interopRequireDefault(require("./triviaQuiz"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+var comboQuiz = [].concat(_toConsumableArray(_triviaQuiz.default), _toConsumableArray(_sciQuiz.default), _toConsumableArray(_triviaQuiz.default));
+var _default = comboQuiz;
+exports.default = _default;
+},{"./sciQuiz":"assets/quizzes/sciQuiz.js","./triviaQuiz":"assets/quizzes/triviaQuiz.js"}],"assets/quizzes/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "sciQuiz", {
+  enumerable: true,
+  get: function () {
+    return _sciQuiz.default;
+  }
+});
+Object.defineProperty(exports, "triviaQuiz", {
+  enumerable: true,
+  get: function () {
+    return _triviaQuiz.default;
+  }
+});
+Object.defineProperty(exports, "oopQuiz", {
+  enumerable: true,
+  get: function () {
+    return _oopQuiz.default;
+  }
+});
+Object.defineProperty(exports, "comboQuiz", {
+  enumerable: true,
+  get: function () {
+    return _comboQuiz.default;
+  }
+});
+
+var _sciQuiz = _interopRequireDefault(require("./sciQuiz"));
+
+var _triviaQuiz = _interopRequireDefault(require("./triviaQuiz"));
+
+var _oopQuiz = _interopRequireDefault(require("./oopQuiz"));
+
+var _comboQuiz = _interopRequireDefault(require("./comboQuiz"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./sciQuiz":"assets/quizzes/sciQuiz.js","./triviaQuiz":"assets/quizzes/triviaQuiz.js","./oopQuiz":"assets/quizzes/oopQuiz.js","./comboQuiz":"assets/quizzes/comboQuiz.js"}],"assets/quiz.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -168,11 +273,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// declare variable for timer
-var timer; // declare variable for the quiz object
-
-var thisQuiz; // keep track of quiz totals since a new quiz object is being created for each new quiz.
-
+var timer;
 var quizzes = {
   repeatedQuizIndex: [],
   quizzesAlreadyTaken: [],
@@ -361,6 +462,21 @@ function () {
   return Quiz;
 }();
 
+var _default = Quiz;
+exports.default = _default;
+},{}],"assets/index.js":[function(require,module,exports) {
+"use strict";
+
+var _quizzes = require("./quizzes");
+
+var _quiz = _interopRequireDefault(require("./quiz"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// declare variable for timer
+// declare variable for the quiz object
+var thisQuiz; // keep track of quiz totals since a new quiz object is being created for each new quiz.
+
 $('#quiz').on('change', '.form-check-input', function () {
   // GET question index out of "name" attribute so we know what question you answered
   var questionIndex = $(this).attr('name'); // get value out of radio button selected
@@ -372,9 +488,9 @@ $('#quiz').on('change', '.form-check-input', function () {
 $(document).on('click', '#start', function () {
   $('#quiz').empty(); //create newQuiz object
 
-  thisQuiz = new Quiz(); //add quiz question arrays declared earlier
+  thisQuiz = new _quiz.default(); //add quiz question arrays declared earlier
 
-  thisQuiz.addQuestionBank(_questions.comboQuiz, _questions.sciQuiz, _questions.oopQuiz, _questions.triviaQuiz); //set the questionBank to the new quiz
+  thisQuiz.addQuestionBank(_quizzes.comboQuiz, _quizzes.sciQuiz, _quizzes.oopQuiz, _quizzes.triviaQuiz); //set the questionBank to the new quiz
 
   thisQuiz.setQuestionBank(); //start quiz
   // thisQuiz.startQuiz();
@@ -385,7 +501,7 @@ $(document).on('click', '#finish', function () {
 $(document).on('click', '#start-over', function () {
   window.location.reload();
 });
-},{"./questions":"assets/questions.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./quizzes":"assets/quizzes/index.js","./quiz":"assets/quiz.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -413,7 +529,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58388" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61387" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
