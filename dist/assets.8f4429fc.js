@@ -306,7 +306,7 @@ function () {
 
           _this.randomize(choices);
 
-          choices.forEach(function (choice, index) {
+          choices.forEach(function (choice) {
             $('#quiz').append("<div class=\"form-check form-check-inline my-2\">\n            <input class=\"form-check-input\" name=\"".concat(index, "\" type=\"radio\" id=\"").concat(choice, "\" value=\"").concat(choice, "\">\n            <label class=\"form-check-label answers\" for=\"").concat(choice, "\">").concat(choice, "</label>\n          </div>"));
           });
         });
@@ -365,7 +365,8 @@ $('#quiz').on('change', '.form-check-input', function () {
   // GET question index out of "name" attribute so we know what question you answered
   var questionIndex = $(this).attr('name'); // get value out of radio button selected
 
-  var answer = $(this).val(); // set answer to question's userAnswer property
+  var answer = $(this).val();
+  console.log(answer); // set answer to question's userAnswer property
 
   thisQuiz.questionsArray[questionIndex].userAnswer = answer;
 });
@@ -413,7 +414,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55308" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55398" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

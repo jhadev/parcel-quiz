@@ -129,7 +129,8 @@ class Quiz {
         <h2 class="rounded my-4">${question}</h2>
        `);
         this.randomize(choices);
-        choices.forEach((choice, index) => {
+
+        choices.forEach(choice => {
           $('#quiz').append(
             `<div class="form-check form-check-inline my-2">
             <input class="form-check-input" name="${index}" type="radio" id="${choice}" value="${choice}">
@@ -211,6 +212,8 @@ $('#quiz').on('change', '.form-check-input', function() {
   const questionIndex = $(this).attr('name');
   // get value out of radio button selected
   const answer = $(this).val();
+
+  console.log(answer);
   // set answer to question's userAnswer property
   thisQuiz.questionsArray[questionIndex].userAnswer = answer;
 });
