@@ -206,6 +206,8 @@ var _sciQuiz = _interopRequireDefault(require("./sciQuiz"));
 
 var _triviaQuiz = _interopRequireDefault(require("./triviaQuiz"));
 
+var _oopQuiz = _interopRequireDefault(require("./oopQuiz"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -216,10 +218,31 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-var comboQuiz = [].concat(_toConsumableArray(_triviaQuiz.default), _toConsumableArray(_sciQuiz.default), _toConsumableArray(_triviaQuiz.default));
+var comboQuiz = [].concat(_toConsumableArray(_oopQuiz.default), _toConsumableArray(_sciQuiz.default), _toConsumableArray(_triviaQuiz.default));
 var _default = comboQuiz;
 exports.default = _default;
-},{"./sciQuiz":"assets/quizzes/sciQuiz.js","./triviaQuiz":"assets/quizzes/triviaQuiz.js"}],"assets/quizzes/index.js":[function(require,module,exports) {
+},{"./sciQuiz":"assets/quizzes/sciQuiz.js","./triviaQuiz":"assets/quizzes/triviaQuiz.js","./oopQuiz":"assets/quizzes/oopQuiz.js"}],"assets/quizzes/movieQuiz.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _question = _interopRequireDefault(require("../question"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var movies1 = new _question.default('A group of Earth children help a stranded alien botanist return home is the plot outline of this movie.', ['The Hitch Hikers Guide to the Galaxy', 'Cyborg', 'E.T. the Extra-Terrestrial', 'Star Wars: Episode VI - Return of the Jedi'], 'E.T. the Extra-Terrestrial', 'Movies');
+var movies2 = new _question.default('What year did the movie The Shawshank Redemption hit the movie theatres?', ['1994', '1992', '1990', '1996'], '1994', 'Movies');
+var movies3 = new _question.default('What was the name of Doc Browns dog in the film Back to the Future?', ['Shep', 'Einstein', 'Edsel', 'Shaggy'], 'Einstein', 'Movies');
+var movies4 = new _question.default('In which movie is there a character named Del Griffith', ['Planes, Trains & Automobiles', 'Class Reunion', 'Uncle Buck', ' Ferris Buellers Day Off'], 'Planes, Trains & Automobiles', 'Movies');
+var movies5 = new _question.default('Robert DeNiro and Danny DeVito were first considered for the roles of burglars Harry and Marv in the hilarious movie Home Alone.', ['True', 'False'], 'True', 'Movies');
+var movies6 = new _question.default('Jason Voorhees, the main character in Friday the 13th series puts on a mask to hide his horrible face in which movie?', ['Friday the 13th: A New Beginning', 'Friday the 13th Part VI: Jason Lives', 'Friday the 13th Part 2', 'Friday the 13th Part 3'], 'Friday the 13th Part 3', 'Movies');
+var movieQuiz = [movies1, movies2, movies3, movies4, movies5, movies6];
+var _default = movieQuiz;
+exports.default = _default;
+},{"../question":"assets/question.js"}],"assets/quizzes/index.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -249,6 +272,12 @@ Object.defineProperty(exports, "comboQuiz", {
     return _comboQuiz.default;
   }
 });
+Object.defineProperty(exports, "movieQuiz", {
+  enumerable: true,
+  get: function () {
+    return _movieQuiz.default;
+  }
+});
 
 var _sciQuiz = _interopRequireDefault(require("./sciQuiz"));
 
@@ -258,8 +287,10 @@ var _oopQuiz = _interopRequireDefault(require("./oopQuiz"));
 
 var _comboQuiz = _interopRequireDefault(require("./comboQuiz"));
 
+var _movieQuiz = _interopRequireDefault(require("./movieQuiz"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./sciQuiz":"assets/quizzes/sciQuiz.js","./triviaQuiz":"assets/quizzes/triviaQuiz.js","./oopQuiz":"assets/quizzes/oopQuiz.js","./comboQuiz":"assets/quizzes/comboQuiz.js"}],"assets/quiz.js":[function(require,module,exports) {
+},{"./sciQuiz":"assets/quizzes/sciQuiz.js","./triviaQuiz":"assets/quizzes/triviaQuiz.js","./oopQuiz":"assets/quizzes/oopQuiz.js","./comboQuiz":"assets/quizzes/comboQuiz.js","./movieQuiz":"assets/quizzes/movieQuiz.js"}],"assets/quiz.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -407,7 +438,7 @@ function () {
 
           _this.randomize(choices);
 
-          choices.forEach(function (choice, index) {
+          choices.forEach(function (choice) {
             $('#quiz').append("<div class=\"form-check form-check-inline my-2\">\n            <input class=\"form-check-input\" name=\"".concat(index, "\" type=\"radio\" id=\"").concat(choice, "\" value=\"").concat(choice, "\">\n            <label class=\"form-check-label answers\" for=\"").concat(choice, "\">").concat(choice, "</label>\n          </div>"));
           });
         });
@@ -481,7 +512,8 @@ $('#quiz').on('change', '.form-check-input', function () {
   // GET question index out of "name" attribute so we know what question you answered
   var questionIndex = $(this).attr('name'); // get value out of radio button selected
 
-  var answer = $(this).val(); // set answer to question's userAnswer property
+  var answer = $(this).val();
+  console.log(answer); // set answer to question's userAnswer property
 
   thisQuiz.questionsArray[questionIndex].userAnswer = answer;
 });
@@ -490,7 +522,7 @@ $(document).on('click', '#start', function () {
 
   thisQuiz = new _quiz.default(); //add quiz question arrays declared earlier
 
-  thisQuiz.addQuestionBank(_quizzes.comboQuiz, _quizzes.sciQuiz, _quizzes.oopQuiz, _quizzes.triviaQuiz); //set the questionBank to the new quiz
+  thisQuiz.addQuestionBank(_quizzes.sciQuiz, _quizzes.triviaQuiz, _quizzes.oopQuiz, _quizzes.movieQuiz); //set the questionBank to the new quiz
 
   thisQuiz.setQuestionBank(); //start quiz
   // thisQuiz.startQuiz();
@@ -529,7 +561,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61387" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56447" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
