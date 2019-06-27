@@ -124,7 +124,7 @@ class Quiz {
         <h2 class="rounded my-4">${question}</h2>
        `);
         this.randomize(choices);
-        choices.forEach((choice, index) => {
+        choices.forEach(choice => {
           $('#quiz').append(
             `<div class="form-check form-check-inline my-2">
             <input class="form-check-input" name="${index}" type="radio" id="${choice}" value="${choice}">
