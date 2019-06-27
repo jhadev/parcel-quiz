@@ -1,0 +1,42 @@
+.answers {
+  font-size: 20px;
+}
+
+#quiz>h2 {
+  font-size: 1.8rem;
+}
+
+body {
+  background-color: black;
+}
+
+.card-bg {
+  background-color: black !important;
+}
+
+hr {
+  border-color: #fff;
+}
+
+/* .game-stats {
+  margin-top: -4px;
+} */
+
+.jumbo-style,
+.jumbotron {
+  background-color: black;
+  margin-bottom: 0px !important;
+}
+
+@media screen and (max-width: 640px) {
+
+  #quiz>h2 {
+    font-size: 1.1rem
+  }
+
+  .answers {
+    font-size: 0.9rem
+  }
+}
+
+/*# sourceMappingURL=/style.91ba9fdb.css.map */

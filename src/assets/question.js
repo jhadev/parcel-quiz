@@ -1,4 +1,4 @@
-//class for making the question objects, takes in the question, choices, and correctAnswer.
+// class for making the question objects, takes in the question, choices, title, correctAnswer.
 class Question {
   constructor(question, choices, correctAnswer, title) {
     this.question = question;

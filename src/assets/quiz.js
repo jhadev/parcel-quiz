@@ -9,50 +9,49 @@ const quizzes = {
   totalScore: 0
 };
 
-//class blueprint for new Quiz objects, sets correct and incorrect to 0, sets questionsArray and quizQuestionBanks to an empty array
+// class blueprint for new Quiz objects, sets correct and incorrect to 0, sets questionsArray and quizQuestionBanks to an empty array
 class Quiz {
   constructor() {
     this.correct = 0;
     this.incorrect = 0;
     this.counter = 0;
-    //questionsArray will hold the quiz array for the specific instance of the quiz being generated
+    // questionsArray will hold the quiz array for the specific instance of the quiz being generated
     this.questionsArray = [];
-    //this array holds all the questionBanks as an array of arrays, allowing the quiz to be randomly generated.
+    // this array holds all the questionBanks as an array of arrays, allowing the quiz to be randomly generated.
     this.quizQuestionBanks = [];
   }
 
-  //method to add questions to any array. Since the exact number of questions for each quiz can be anything the rest parameter is used.
+  // method to add questions to any array. Since the exact number of questions for each quiz can be anything the rest parameter is used.
   addQuestionBank(...questions) {
     //push our array of questionBanks
     this.quizQuestionBanks.push(...questions);
   }
-  //use lodash to check for 2 equal arrays
+  // use lodash to check for 2 equal arrays
   areEqual(arr1, arr2) {
     return _.isEqual(arr1, arr2);
   }
 
   setQuestionBank() {
-    //grab random index based on question bank array
+    // grab random index based on question bank array
     let randomIndex = Math.floor(Math.random() * this.quizQuestionBanks.length);
-    console.log(randomIndex);
-    //add randomIndex to repeatedQuizIndex[0]
-    //if repeated Quiz index does not include the random index
+    // add randomIndex to repeatedQuizIndex[0]
+    // if repeated Quiz index does not include the random index
     if (!quizzes.repeatedQuizIndex.includes(randomIndex)) {
       //set index to [0]
       quizzes.repeatedQuizIndex.unshift(randomIndex);
-      //set questions array to the randomly chosen bank
+      // set questions array to the randomly chosen bank
       this.questionsArray = this.quizQuestionBanks[randomIndex];
-      //set counter to a certain amount of seconds per question
+      // set counter to a certain amount of seconds per question
       this.counter = this.questionsArray.length * 10;
-      //start the quiz
+      // start the quiz
       this.startQuiz();
     } else {
-      //run this again
+      // run this again
       this.setQuestionBank();
     }
   }
 
-  //method to convert seconds into minutes for the counter
+  // method to convert seconds into minutes for the counter
   convertTime(timeInSeconds) {
     return `${Math.floor(timeInSeconds / 60)}:${(timeInSeconds % 60 < 10
       ? '0'
@@ -79,21 +78,13 @@ class Quiz {
 
   // this allows combo quizzes to combine titles
   setTitle() {
-    //get title
+    // get title
     const titleArray = this.questionsArray.map(question => question.title);
-    //use a set to remove dupes instead
+    // use a set to remove dupes instead
     const $titleArray = Array.from(new Set(titleArray));
     $('#quiz-wrapper').prepend(
       `<h2 class="title my-4">${$titleArray.join(` & `)}</h2>`
     );
-
-    // $(".title").css("background", "black");
-    //   //starting themes based on title
-    // if ($titleArray[0] === "90's Trivia") {
-    //   $("body").css("background-image", "url('assets/images/tacky.jpg')");
-    // } else {
-    //   $("body").css("background", "black");
-    // }
   }
 
   startQuiz() {
@@ -101,12 +92,12 @@ class Quiz {
     $('.jumbo-style').hide();
     $('#quiz-wrapper').addClass('mt-5');
     $('.card-bg').addClass('border-light');
-    //checking if the 2 arrays are equal before allowing quiz to be taken.
+    // checking if the 2 arrays are equal before allowing quiz to be taken.
     const { quizzesAlreadyTaken } = quizzes;
     if (
       !this.areEqual(quizzesAlreadyTaken.sort(), this.quizQuestionBanks.sort())
     ) {
-      //setInterval method called to run the counter method every second. Bind this so it doesn't lose context.
+      // setInterval method called to run the counter method every second. Bind this so it doesn't lose context.
       timer = setInterval(this.runCounter.bind(this), 1000);
 
       $('.title').after(
@@ -145,7 +136,7 @@ class Quiz {
 
   finishQuiz() {
     const { quizzesAlreadyTaken } = quizzes;
-    //push quiz here once it is finished
+    // push quiz here once it is finished
     quizzesAlreadyTaken.push(this.questionsArray);
     for (let i = 0; i < this.questionsArray.length; i++) {
       const { correctAnswer, userAnswer } = this.questionsArray[i];
@@ -191,7 +182,7 @@ class Quiz {
     `);
 
     if (quizzes.quizzesAlreadyTaken.length === this.quizQuestionBanks.length) {
-      //remove start button so you can't click it again bc the browser will crash. condition in set question bank causes it.
+      // remove start button so you can't click it again bc the browser will crash. condition in set question bank causes it.
       $('#start').remove();
       $('.finished').html(`<h3>You've taken all the quizzes!</h3>`);
       $('.game-stats').append(

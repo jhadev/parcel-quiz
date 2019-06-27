@@ -12,8 +12,6 @@ $('#quiz').on('change', '.form-check-input', function() {
   const questionIndex = $(this).attr('name');
   // get value out of radio button selected
   const answer = $(this).val();
-
-  console.log(answer);
   // set answer to question's userAnswer property
   thisQuiz.questionsArray[questionIndex].userAnswer = answer;
 });

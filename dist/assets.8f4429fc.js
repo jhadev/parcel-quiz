@@ -127,7 +127,7 @@ exports.default = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-//class for making the question objects, takes in the question, choices, and correctAnswer.
+// class for making the question objects, takes in the question, choices, title, correctAnswer.
 var Question = function Question(question, choices, correctAnswer, title) {
   _classCallCheck(this, Question);
 
@@ -312,7 +312,7 @@ var quizzes = {
   totalIncorrect: 0,
   totalQuestionCount: 0,
   totalScore: 0
-}; //class blueprint for new Quiz objects, sets correct and incorrect to 0, sets questionsArray and quizQuestionBanks to an empty array
+}; // class blueprint for new Quiz objects, sets correct and incorrect to 0, sets questionsArray and quizQuestionBanks to an empty array
 
 var Quiz =
 /*#__PURE__*/
@@ -322,12 +322,12 @@ function () {
 
     this.correct = 0;
     this.incorrect = 0;
-    this.counter = 0; //questionsArray will hold the quiz array for the specific instance of the quiz being generated
+    this.counter = 0; // questionsArray will hold the quiz array for the specific instance of the quiz being generated
 
-    this.questionsArray = []; //this array holds all the questionBanks as an array of arrays, allowing the quiz to be randomly generated.
+    this.questionsArray = []; // this array holds all the questionBanks as an array of arrays, allowing the quiz to be randomly generated.
 
     this.quizQuestionBanks = [];
-  } //method to add questions to any array. Since the exact number of questions for each quiz can be anything the rest parameter is used.
+  } // method to add questions to any array. Since the exact number of questions for each quiz can be anything the rest parameter is used.
 
 
   _createClass(Quiz, [{
@@ -337,7 +337,7 @@ function () {
 
       //push our array of questionBanks
       (_this$quizQuestionBan = this.quizQuestionBanks).push.apply(_this$quizQuestionBan, arguments);
-    } //use lodash to check for 2 equal arrays
+    } // use lodash to check for 2 equal arrays
 
   }, {
     key: "areEqual",
@@ -347,25 +347,24 @@ function () {
   }, {
     key: "setQuestionBank",
     value: function setQuestionBank() {
-      //grab random index based on question bank array
-      var randomIndex = Math.floor(Math.random() * this.quizQuestionBanks.length);
-      console.log(randomIndex); //add randomIndex to repeatedQuizIndex[0]
-      //if repeated Quiz index does not include the random index
+      // grab random index based on question bank array
+      var randomIndex = Math.floor(Math.random() * this.quizQuestionBanks.length); // add randomIndex to repeatedQuizIndex[0]
+      // if repeated Quiz index does not include the random index
 
       if (!quizzes.repeatedQuizIndex.includes(randomIndex)) {
         //set index to [0]
-        quizzes.repeatedQuizIndex.unshift(randomIndex); //set questions array to the randomly chosen bank
+        quizzes.repeatedQuizIndex.unshift(randomIndex); // set questions array to the randomly chosen bank
 
-        this.questionsArray = this.quizQuestionBanks[randomIndex]; //set counter to a certain amount of seconds per question
+        this.questionsArray = this.quizQuestionBanks[randomIndex]; // set counter to a certain amount of seconds per question
 
-        this.counter = this.questionsArray.length * 10; //start the quiz
+        this.counter = this.questionsArray.length * 10; // start the quiz
 
         this.startQuiz();
       } else {
-        //run this again
+        // run this again
         this.setQuestionBank();
       }
-    } //method to convert seconds into minutes for the counter
+    } // method to convert seconds into minutes for the counter
 
   }, {
     key: "convertTime",
@@ -399,19 +398,13 @@ function () {
   }, {
     key: "setTitle",
     value: function setTitle() {
-      //get title
+      // get title
       var titleArray = this.questionsArray.map(function (question) {
         return question.title;
-      }); //use a set to remove dupes instead
+      }); // use a set to remove dupes instead
 
       var $titleArray = Array.from(new Set(titleArray));
-      $('#quiz-wrapper').prepend("<h2 class=\"title my-4\">".concat($titleArray.join(" & "), "</h2>")); // $(".title").css("background", "black");
-      //   //starting themes based on title
-      // if ($titleArray[0] === "90's Trivia") {
-      //   $("body").css("background-image", "url('assets/images/tacky.jpg')");
-      // } else {
-      //   $("body").css("background", "black");
-      // }
+      $('#quiz-wrapper').prepend("<h2 class=\"title my-4\">".concat($titleArray.join(" & "), "</h2>"));
     }
   }, {
     key: "startQuiz",
@@ -421,12 +414,12 @@ function () {
       this.setTitle();
       $('.jumbo-style').hide();
       $('#quiz-wrapper').addClass('mt-5');
-      $('.card-bg').addClass('border-light'); //checking if the 2 arrays are equal before allowing quiz to be taken.
+      $('.card-bg').addClass('border-light'); // checking if the 2 arrays are equal before allowing quiz to be taken.
 
       var quizzesAlreadyTaken = quizzes.quizzesAlreadyTaken;
 
       if (!this.areEqual(quizzesAlreadyTaken.sort(), this.quizQuestionBanks.sort())) {
-        //setInterval method called to run the counter method every second. Bind this so it doesn't lose context.
+        // setInterval method called to run the counter method every second. Bind this so it doesn't lose context.
         timer = setInterval(this.runCounter.bind(this), 1000);
         $('.title').after("<h2 class=\"my-4\">Time Remaining: <span id=\"counter-number\">".concat(this.convertTime(this.counter), "</span></h2>"));
         $('#start').remove();
@@ -450,7 +443,7 @@ function () {
   }, {
     key: "finishQuiz",
     value: function finishQuiz() {
-      var quizzesAlreadyTaken = quizzes.quizzesAlreadyTaken; //push quiz here once it is finished
+      var quizzesAlreadyTaken = quizzes.quizzesAlreadyTaken; // push quiz here once it is finished
 
       quizzesAlreadyTaken.push(this.questionsArray);
 
@@ -482,7 +475,7 @@ function () {
       $('.game-stats').append("\n    <h3>Correct: ".concat(this.correct, "</h3>\n    <h3>Incorrect: ").concat(this.incorrect, "</h3>\n    <h2>Your Score: ").concat(score, "</h2>\n    <hr class=\"my-4\">\n    <h3>Total Correct: ").concat(quizzes.totalCorrect, "</h3>\n    <h3>Total Incorrect: ").concat(quizzes.totalIncorrect, "</h3>\n    <h2>Total Score: ").concat(quizzes.totalScore, "</h3>\n    <button class=\"btn btn-outline-success mt-4\" id=\"start\">Start Next Quiz</button>\n    "));
 
       if (quizzes.quizzesAlreadyTaken.length === this.quizQuestionBanks.length) {
-        //remove start button so you can't click it again bc the browser will crash. condition in set question bank causes it.
+        // remove start button so you can't click it again bc the browser will crash. condition in set question bank causes it.
         $('#start').remove();
         $('.finished').html("<h3>You've taken all the quizzes!</h3>");
         $('.game-stats').append("<button class=\"btn btn-outline-success mt-4\" id=\"start-over\">Start Over</button>");
@@ -512,8 +505,7 @@ $('#quiz').on('change', '.form-check-input', function () {
   // GET question index out of "name" attribute so we know what question you answered
   var questionIndex = $(this).attr('name'); // get value out of radio button selected
 
-  var answer = $(this).val();
-  console.log(answer); // set answer to question's userAnswer property
+  var answer = $(this).val(); // set answer to question's userAnswer property
 
   thisQuiz.questionsArray[questionIndex].userAnswer = answer;
 });
@@ -533,11 +525,7 @@ $(document).on('click', '#finish', function () {
 $(document).on('click', '#start-over', function () {
   window.location.reload();
 });
-<<<<<<< HEAD
-},{"./questions":"assets/questions.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
-=======
 },{"./quizzes":"assets/quizzes/index.js","./quiz":"assets/quiz.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
->>>>>>> test
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -565,11 +553,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-<<<<<<< HEAD
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55398" + '/');
-=======
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56060" + '/');
->>>>>>> test
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57259" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
