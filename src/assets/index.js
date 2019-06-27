@@ -1,4 +1,5 @@
-import { sciQuiz, triviaQuiz, oopQuiz, comboQuiz } from './quizzes';
+// import { sciQuiz, triviaQuiz, oopQuiz, comboQuiz, movieQuiz } from './quizzes';
+import sciQuiz from './quizzes/sciQuiz';
 import Quiz from './quiz';
 
 // declare variable for timer
@@ -21,7 +22,7 @@ $(document).on('click', '#start', function() {
   //create newQuiz object
   thisQuiz = new Quiz();
   //add quiz question arrays declared earlier
-  thisQuiz.addQuestionBank(comboQuiz, sciQuiz, oopQuiz, triviaQuiz);
+  thisQuiz.addQuestionBank(sciQuiz);
   //set the questionBank to the new quiz
   thisQuiz.setQuestionBank();
   //start quiz
